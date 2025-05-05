@@ -39,7 +39,6 @@
         </div>
     </nav>
 
-    <!-- Page content -->
     <div class="container-fluid">
             <h2>{{ course.name }}</h2>
             <div class="card-columns-vertical">
@@ -55,6 +54,7 @@
                 <button class="btn btn-primary" data-toggle="collapse" data-target="#exam">Start Exam</button>
                 <div id="exam" class="collapse">
                     <form id="questionform" action="{% url 'onlinecourse:submit' course.id %}" method="POST">
+                        {% for question in course.question_set.all %}
                         <div class="card mt-1">
                             <div class="card-header"><h5>{{ question.text }}</h5>
                             </div>
@@ -69,9 +69,10 @@
                                     </label>
                                 </div>
                                 {% endfor %}
-                                <input class="btn btn-success btn-block" type="submit" value="Submit">
                             </div>
                         </div>
+                        {% endfor %}
+                        <input class="btn btn-success btn-block" type="submit" value="Submit">
                     </form>
                 </div>
             {% endif %}
